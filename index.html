@@ -881,6 +881,20 @@ function select(record, updateUrl = true) {
     };
     actions.append(b);
   }
+  if (record.id === '2025-12') {
+    const clips = ['0a20377d1e93417b', 'da15be3c3206de95', '2d4489a12a173b90', '9501412183fcb735', '8c873e8c3743ac61', 'c1d5c47cc7a901a5', '7292c80ca4f95de1', '713e27c349507687', '6e9d785c35811edb', 'ad3fda879717f405', 'c1688676d4cabd0f'];
+    const select = document.createElement('select');
+    select.setAttribute('aria-label', '选择問題4题号');
+    clips.forEach((_, i) => select.add(new Option('第 ' + (i + 1) + ' 题', i)));
+    const player = document.createElement('audio');
+    player.controls = true;
+    player.preload = 'none';
+    const selectClip = () => { player.src = 'https://media.learnwithsubs.uk/m/' + clips[select.selectedIndex] + '.mp3'; };
+    select.onchange = selectClip;
+    selectClip();
+    actions.prepend(select, player);
+    actions.append(link('逐题音频来源 ↗', 'https://learnwithsubs.uk/en/jlpt/n2/2025-12/listening#m4'));
+  }
   if (record.audio) actions.append(link(ep ? 'Apple 播客 ↗' : '蜻蜓 FM 播放 ↗', record.audio));
   actions.append(link('试卷与听力入口 ↗', 'https://okjlpt.com/zh-Hans/n2/papers/' + record.id));
   fillSource('transcript', record.source, '这套题的本机原文尚未定位，可从上方试卷入口查看。');
